@@ -1,0 +1,500 @@
+.reviews-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .reviews-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .reviews-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+  }
+  
+  .filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .search-container {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 0.625rem 0.75rem 0.625rem 2.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  
+  .search-input:focus {
+    border-color: #2563eb;
+  }
+  
+  .status-filter {
+    position: relative;
+    width: 200px;
+  }
+  
+  .filter-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+  }
+  
+  .status-select {
+    width: 100%;
+    padding: 0.625rem 0.75rem 0.625rem 2.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    background-color: white;
+    outline: none;
+    transition: border-color 0.2s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1rem;
+  }
+  
+  .status-select:focus {
+    border-color: #2563eb;
+  }
+  
+  .reviews-table-container {
+    overflow-x: auto;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+  
+  .reviews-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .reviews-table th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #64748b;
+    border-bottom: 1px solid #e2e8f0;
+    cursor: pointer;
+  }
+  
+  .th-content {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  
+  .reviews-table td {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: #1e293b;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .review-title-cell {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .star-rating {
+    display: flex;
+    align-items: center;
+  }
+  
+  .star-filled {
+    color: #f59e0b;
+  }
+  
+  .star-empty {
+    color: #e2e8f0;
+  }
+  
+  .status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  
+  .status-badge.approved {
+    background-color: #dcfce7;
+    color: #16a34a;
+  }
+  
+  .status-badge.pending {
+    background-color: #fef3c7;
+    color: #92400e;
+  }
+  
+  .status-badge.rejected {
+    background-color: #fee2e2;
+    color: #ef4444;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .view-btn,
+  .approve-btn,
+  .reject-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 0.25rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .view-btn {
+    background-color: #f1f5f9;
+    color: #64748b;
+  }
+  
+  .view-btn:hover {
+    background-color: #e2e8f0;
+    color: #1e293b;
+  }
+  
+  .approve-btn {
+    background-color: #dcfce7;
+    color: #16a34a;
+  }
+  
+  .approve-btn:hover {
+    background-color: #bbf7d0;
+  }
+  
+  .reject-btn {
+    background-color: #fee2e2;
+    color: #ef4444;
+  }
+  
+  .reject-btn:hover {
+    background-color: #fecaca;
+  }
+  
+  .no-reviews {
+    text-align: center;
+    padding: 2rem;
+    color: #64748b;
+  }
+  
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 0.25rem;
+    border: 1px solid #e2e8f0;
+    background-color: white;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .pagination-btn:hover:not(:disabled) {
+    border-color: #2563eb;
+    color: #2563eb;
+  }
+  
+  .pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .pagination-info {
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+  
+  /* Review Modal Styles */
+  .review-modal {
+    max-width: 600px;
+    width: 90%;
+  }
+  
+  .review-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .review-product-info h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .review-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .review-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .rating-text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #64748b;
+  }
+  
+  .review-date {
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+  
+  .review-content {
+    background-color: #f8fafc;
+    border-radius: 0.375rem;
+    padding: 1rem;
+  }
+  
+  .review-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+  }
+  
+  .review-comment {
+    display: flex;
+    gap: 0.75rem;
+    color: #64748b;
+  }
+  
+  .review-comment svg {
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+  }
+  
+  .review-comment p {
+    margin: 0;
+    line-height: 1.5;
+  }
+  
+  .review-customer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .customer-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .avatar-initials {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+  }
+  
+  .customer-name {
+    font-weight: 500;
+    color: #1e293b;
+  }
+  
+  .customer-type {
+    font-size: 0.75rem;
+    color: #64748b;
+  }
+  
+  .review-status-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .current-status {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .status-label {
+    font-weight: 500;
+    color: #64748b;
+  }
+  
+  .status-actions {
+    display: flex;
+    gap: 0.75rem;
+  }
+  
+  .approve-action-btn,
+  .reject-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .approve-action-btn {
+    background-color: #dcfce7;
+    color: #16a34a;
+  }
+  
+  .approve-action-btn:hover {
+    background-color: #bbf7d0;
+  }
+  
+  .reject-action-btn {
+    background-color: #fee2e2;
+    color: #ef4444;
+  }
+  
+  .reject-action-btn:hover {
+    background-color: #fecaca;
+  }
+  
+  .close-btn {
+    padding: 0.5rem 1rem;
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .close-btn:hover {
+    background-color: #e2e8f0;
+    color: #1e293b;
+  }
+
+  /* Add these styles to your existing CSS file */
+
+.deletee-btn {
+  background-color: #fee2e2;
+  color: #dc2626;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
+}
+
+.deletee-btn:hover {
+  background-color: #fecaca;
+}
+
+.deletee-btn svg {
+  flex-shrink: 0;
+}
+
+/* Modal footer specific styles */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 20px;
+}
+
+.modal-footer .deletee-btn {
+  order: 1; /* Makes delete button appear first */
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.modal-footer .close-btn {
+  order: 2;
+}
+
+/* Make the buttons more balanced */
+.close-btn {
+  padding: 8px 16px;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background-color: #e2e8f0;
+  color: #1e293b;
+}
+
+/* For the table delete button (small version) */
+.action-buttons .deletee-btn {
+  padding: 6px;
+  width: 28px;
+  height: 28px;
+  justify-content: center;
+}
+  

@@ -1,0 +1,445 @@
+.orders-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.orders-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.orders-header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.search-container {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.625rem 0.75rem 0.625rem 2.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #2563eb;
+}
+
+.status-filter {
+  position: relative;
+  width: 200px;
+}
+
+.filter-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+}
+
+.status-select {
+  width: 100%;
+  padding: 0.625rem 0.75rem 0.625rem 2.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  background-color: white;
+  outline: none;
+  transition: border-color 0.2s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1rem;
+}
+
+.status-select:focus {
+  border-color: #2563eb;
+}
+
+.orders-table-container {
+  overflow-x: auto;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orders-table th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #64748b;
+  border-bottom: 1px solid #e2e8f0;
+  cursor: pointer;
+}
+
+.th-content {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.orders-table td {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: #1e293b;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.customer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.customer-name {
+  font-weight: 500;
+}
+
+.customer-email {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.status-dropdown {
+  padding: 0.375rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.25rem center;
+  background-size: 0.75rem;
+  padding-right: 1.5rem;
+  cursor: pointer;
+}
+
+.status-dropdown.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-dropdown.processing {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.status-dropdown.shipped {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-dropdown.delivered {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+.status-dropdown.cancelled {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.view-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 0.25rem;
+  border: none;
+  background-color: #f1f5f9;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-btn:hover {
+  background-color: #e2e8f0;
+  color: #1e293b;
+}
+
+.no-orders {
+  text-align: center;
+  padding: 2rem;
+  color: #64748b;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.pagination-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 0.25rem;
+  border: 1px solid #e2e8f0;
+  background-color: white;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+/* Order Modal Styles */
+.order-modal {
+  max-width: 800px;
+  width: 90%;
+}
+
+.order-details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .order-details-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.order-info-section,
+.customer-info-section {
+  background-color: #f8fafc;
+  border-radius: 0.375rem;
+  padding: 1rem;
+}
+
+.order-info-section h3,
+.customer-info-section h3,
+.order-items-section h3,
+.order-status-section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 0.75rem 0;
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+.info-label {
+  font-weight: 500;
+  color: #64748b;
+  width: 40%;
+}
+
+.info-value {
+  color: #1e293b;
+  width: 60%;
+}
+
+.status-text {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  width: auto;
+}
+
+.status-text.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-text.processing {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.status-text.shipped {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-text.delivered {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+.status-text.cancelled {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.order-items-section {
+  margin-bottom: 1.5rem;
+}
+
+.order-items-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order-items-table th {
+  text-align: left;
+  padding: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #64748b;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.order-items-table td {
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  color: #1e293b;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.order-total-label {
+  text-align: right;
+  font-weight: 600;
+  padding-right: 1rem;
+}
+
+.order-total-value {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* Add styling for the shipping cost in the order details */
+.order-grand-total {
+  font-weight: 700;
+  background-color: #f8fafc;
+}
+
+.order-grand-total .order-total-label,
+.order-grand-total .order-total-value {
+  font-size: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: #1e293b;
+}
+
+.order-status-section {
+  margin-bottom: 1rem;
+}
+
+.status-update-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.status-update-dropdown {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1rem;
+  padding-right: 2rem;
+  cursor: pointer;
+}
+
+.status-update-dropdown.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status-update-dropdown.processing {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.status-update-dropdown.shipped {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-update-dropdown.delivered {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+.status-update-dropdown.cancelled {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.close-btn {
+  padding: 0.5rem 1rem;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background-color: #e2e8f0;
+  color: #1e293b;
+}
