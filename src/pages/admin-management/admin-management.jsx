@@ -33,6 +33,62 @@ const AdminManagement = () => {
   const itemsPerPage = 5
   const roles = ["Super Admin", "Admin", "Product Manager", "Order Manager", "Customer Support"]
 
+  const [validationErrors, setValidationErrors] = useState({
+    name: '',
+    email: '',
+    password: '',
+    role: '',
+    status: ''
+  });
+
+  const validateForm = () => {
+  const errors = {};
+  let isValid = true;
+
+  // Name validation (no numbers, required)
+    if (!editingAdmin.name.trim()) {
+      errors.name = 'Name is required';
+      isValid = false;
+    } else if (/\d/.test(editingAdmin.name)) {
+      errors.name = 'Name cannot contain numbers';
+      isValid = false;
+    }
+
+    // Email validation (required and valid format)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!editingAdmin.email.trim()) {
+      errors.email = 'Email is required';
+      isValid = false;
+    } else if (!emailRegex.test(editingAdmin.email)) {
+      errors.email = 'Please enter a valid email address';
+      isValid = false;
+    }
+
+    // Password validation (only for new admins)
+    if (!editingAdmin.id && !editingAdmin.password) {
+      errors.password = 'Password is required';
+      isValid = false;
+    } else if (!editingAdmin.id && editingAdmin.password.length < 6) {
+      errors.password = 'Password must be at least 6 characters';
+      isValid = false;
+    }
+
+    // Role validation
+    if (!editingAdmin.role) {
+      errors.role = 'Role is required';
+      isValid = false;
+    }
+
+    // Status validation
+    if (!editingAdmin.status) {
+      errors.status = 'Status is required';
+      isValid = false;
+    }
+
+    setValidationErrors(errors);
+    return isValid;
+  };
+
   // Get current user role from localStorage
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user") || "{}")
@@ -116,6 +172,13 @@ const AdminManagement = () => {
   // Handle edit admin
   const handleEditAdmin = (admin) => {
     setEditingAdmin({ ...admin })
+    setValidationErrors({
+      name: '',
+      email: '',
+      password: '',
+      role: '',
+      status: ''
+    });
     setIsModalOpen(true)
     setShowPassword(false) // Reset password visibility when editing
   }
@@ -129,12 +192,23 @@ const AdminManagement = () => {
       role: "Admin",
       status: "Active",
     })
+    setValidationErrors({
+      name: '',
+      email: '',
+      password: '',
+      role: '',
+      status: ''
+    });
     setIsModalOpen(true)
     setShowPassword(false) // Reset password visibility when adding
   }
 
   // Handle save admin
   const handleSaveAdmin = async () => {
+    // Validate form before submission
+    if (!validateForm()) {
+      return;
+    }
     try {
       // Add password validation for new admins
       if (!editingAdmin.id && (!editingAdmin.password || editingAdmin.password.length < 6)) {
@@ -357,7 +431,16 @@ const AdminManagement = () => {
           <div className="modall">
             <div className="modal-header">
               <h2>{editingAdmin.id ? "Edit Admin" : "Add New Admin"}</h2>
-              <button className="close-modal" onClick={() => setIsModalOpen(false)}>
+              <button className="close-modal" onClick={() => {
+                  setIsModalOpen(false);
+                  setValidationErrors({
+                    name: '',
+                    email: '',
+                    password: '',
+                    role: '',
+                    status: ''
+                  });
+                }}>
                 <X size={20} />
               </button>
             </div>
@@ -371,7 +454,9 @@ const AdminManagement = () => {
                   value={editingAdmin.name}
                   onChange={(e) => setEditingAdmin({ ...editingAdmin, name: e.target.value })}
                   placeholder="Enter admin name"
+                  className={validationErrors.name ? 'error' : ''}
                 />
+                {validationErrors.name && <span className="error-message">{validationErrors.name}</span>}
               </div>
 
               <div className="form-group">
@@ -382,7 +467,9 @@ const AdminManagement = () => {
                   value={editingAdmin.email}
                   onChange={(e) => setEditingAdmin({ ...editingAdmin, email: e.target.value })}
                   placeholder="Enter your email"
+                  className={validationErrors.email ? 'error' : ''}
                 />
+                {validationErrors.email && <span className="error-message">{validationErrors.email}</span>}
               </div>
 
               {/* Updated password field with visibility toggle */}
@@ -396,6 +483,7 @@ const AdminManagement = () => {
                       value={editingAdmin.password}
                       onChange={(e) => setEditingAdmin({ ...editingAdmin, password: e.target.value })}
                       placeholder="Enter password (min 6 characters)"
+                      className={validationErrors.password ? 'error' : ''}
                     />
                     <button
                       type="button"
@@ -405,6 +493,7 @@ const AdminManagement = () => {
                       {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                     </button>
                   </div>
+                  {validationErrors.password && <span className="error-message">{validationErrors.password}</span>}
                 </div>
               )}
 
@@ -414,6 +503,7 @@ const AdminManagement = () => {
                   id="adminRole"
                   value={editingAdmin.role}
                   onChange={(e) => setEditingAdmin({ ...editingAdmin, role: e.target.value })}
+                  className={validationErrors.role ? 'error' : ''}
                 >
                   {roles.map((role) => (
                     <option key={role} value={role}>
@@ -421,6 +511,7 @@ const AdminManagement = () => {
                     </option>
                   ))}
                 </select>
+                {validationErrors.role && <span className="error-message">{validationErrors.role}</span>}
               </div>
 
               <div className="form-group">
@@ -429,10 +520,12 @@ const AdminManagement = () => {
                   id="adminStatus"
                   value={editingAdmin.status}
                   onChange={(e) => setEditingAdmin({ ...editingAdmin, status: e.target.value })}
+                  className={validationErrors.status ? 'error' : ''}
                 >
                   <option value="Active">Active</option>
                   <option value="Inactive">Inactive</option>
                 </select>
+                {validationErrors.status && <span className="error-message">{validationErrors.status}</span>}
               </div>
             </div>
 

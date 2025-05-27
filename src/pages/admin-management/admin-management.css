@@ -391,3 +391,23 @@
 .delete-confirm-btn:hover {
   background-color: #dc2626;
 }
+
+.error {
+  border-color: #ff4d4f !important;
+}
+
+.error-message {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+.password-input-container {
+  position: relative;
+}
+
+.password-input-container input {
+  padding-right: 32px;
+  width: 100%;
+}

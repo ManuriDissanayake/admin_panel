@@ -10,6 +10,81 @@ const Products = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  const [validationErrors, setValidationErrors] = useState({
+    name: '',
+    description: '',
+    category: '',
+    subcategory: '',
+    price: '',
+    imageUrl: '',
+    sizes: ''
+  });
+
+  const validateProduct = () => {
+    const errors = {};
+    let isValid = true;
+
+    // Name validation
+    if (!editingProduct.name.trim()) {
+      errors.name = 'Product name is required';
+      isValid = false;
+    } else if (editingProduct.name.length > 100) {
+      errors.name = 'Product name must be less than 100 characters';
+      isValid = false;
+    }
+
+    // Description validation
+    if (!editingProduct.description.trim()) {
+      errors.description = 'Description is required';
+      isValid = false;
+    } else if (editingProduct.description.length > 500) {
+      errors.description = 'Description must be less than 500 characters';
+      isValid = false;
+    }
+
+    // Category validation
+    if (!editingProduct.category) {
+      errors.category = 'Main category is required';
+      isValid = false;
+    }
+
+    // Subcategory validation
+    if (!editingProduct.subcategory) {
+      errors.subcategory = 'Subcategory is required';
+      isValid = false;
+    }
+
+    // Price validation
+    if (isNaN(editingProduct.price)) {
+      errors.price = 'Price must be a number';
+      isValid = false;
+    } else if (editingProduct.price <= 0) {
+      errors.price = 'Price must be greater than 0';
+      isValid = false;
+    } else if (editingProduct.price > 100000) {
+      errors.price = 'Price must be less than LKR 100,000';
+      isValid = false;
+    }
+
+    // Image URL validation (basic URL format check)
+    if (imageUrl && !/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/.test(imageUrl)) {
+      errors.imageUrl = 'Please enter a valid URL';
+      isValid = false;
+    }
+
+    // // Size stock validation (at least one size must have stock for new products)
+    // if (!editingProduct.id) {
+    //   const hasStock = Object.values(sizeStocks).some(stock => stock > 0);
+    //   if (!hasStock) {
+    //     errors.sizes = 'At least one size must have stock';
+    //     isValid = false;
+    //   }
+    // }
+
+    setValidationErrors(errors);
+    return isValid;
+  };
+
   // Hardcoded categories data
   const categoriesData = {
     mainCategories: [
@@ -191,6 +266,15 @@ const Products = () => {
       setImageUrl(product.imageUrl)
       setTransparentImageUrl(product.transparentImageUrl || "")
       setIsModalOpen(true)
+      setValidationErrors({
+        name: '',
+        description: '',
+        category: '',
+        subcategory: '',
+        price: '',
+        imageUrl: '',
+        sizes: ''
+      });
     } catch (err) {
       console.error("Error fetching variants:", err)
     }
@@ -209,6 +293,15 @@ const Products = () => {
       imageUrl: "",
       transparentImageUrl: ""
     })
+    setValidationErrors({
+      name: '',
+      description: '',
+      category: '',
+      subcategory: '',
+      price: '',
+      imageUrl: '',
+      sizes: ''
+    });
     setImageUrl("")
     setTransparentImageUrl("")
     setIsModalOpen(true)
@@ -227,6 +320,10 @@ const Products = () => {
 
   // Handle save product
   const handleSaveProduct = async () => {
+    // Validate before saving
+    if (!validateProduct()) {
+      return;
+    }
     setIsSaving(true)
     try {
       // Calculate total stock from size variants
@@ -515,7 +612,19 @@ const Products = () => {
           <div className="modal" style={{ maxWidth: '800px' }}>
             <div className="modal-header">
               <h2>{editingProduct.id ? "Edit Product" : "Add New Product"}</h2>
-              <button className="close-modal" onClick={() => setIsModalOpen(false)}>
+              <button className="close-modal" 
+                onClick={() => {
+                  setIsModalOpen(false);
+                  setValidationErrors({
+                    name: '',
+                    description: '',
+                    category: '',
+                    subcategory: '',
+                    price: '',
+                    imageUrl: '',
+                    sizes: ''
+                  });
+                }}>
                 <X size={20} />
               </button>
             </div>
@@ -528,7 +637,9 @@ const Products = () => {
                   id="productName"
                   value={editingProduct.name}
                   onChange={(e) => setEditingProduct({ ...editingProduct, name: e.target.value })}
+                  className={validationErrors.name ? 'error' : ''}
                 />
+                {validationErrors.name && <span className="error-message">{validationErrors.name}</span>}
               </div>
 
               <div className="form-group">
@@ -538,7 +649,9 @@ const Products = () => {
                   value={editingProduct.description}
                   onChange={(e) => setEditingProduct({ ...editingProduct, description: e.target.value })}
                   rows={3}
+                  className={validationErrors.description ? 'error' : ''}
                 />
+                {validationErrors.description && <span className="error-message">{validationErrors.description}</span>}
               </div>
 
               <div className="form-row">
@@ -558,7 +671,9 @@ const Products = () => {
                         category: newCategory,
                         subcategory: newSubcategory
                       })
+                      setValidationErrors({...validationErrors, category: '', subcategory: ''});
                     }}
+                    className={validationErrors.category ? 'error' : ''}
                   >
                     {categoriesData.mainCategories.map((category) => (
                       <option key={category.id} value={category.name}>
@@ -578,7 +693,9 @@ const Products = () => {
                         ...editingProduct, 
                         subcategory: e.target.value
                       })
+                      setValidationErrors({...validationErrors, subcategory: ''});
                     }}
+                    className={validationErrors.subcategory ? 'error' : ''}
                   >
                     {editingProduct.category && categoriesData.mainCategories.find(c => c.name === editingProduct.category)?.id && (
                       categoriesData.subCategories[categoriesData.mainCategories.find(c => c.name === editingProduct.category).id]?.map((subcategory) => (
@@ -588,6 +705,7 @@ const Products = () => {
                       ))
                     )}
                   </select>
+                  {validationErrors.subcategory && <span className="error-message">{validationErrors.subcategory}</span>}
                 </div>
               </div>
 
@@ -598,8 +716,13 @@ const Products = () => {
                   id="imageUrl"
                   placeholder="Enter image URL or leave empty for placeholder"
                   value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
+                  onChange={(e) => {
+                    setImageUrl(e.target.value);
+                    setValidationErrors({...validationErrors, imageUrl: ''});
+                  }}
+                  className={validationErrors.imageUrl ? 'error' : ''}
                 />
+                {validationErrors.imageUrl && <span className="error-message">{validationErrors.imageUrl}</span>}
               </div>
 
               {imageUrl && (
@@ -638,7 +761,9 @@ const Products = () => {
                       ...editingProduct, 
                       price: parseFloat(e.target.value) || 0 
                     })}
+                    className={validationErrors.price ? 'error' : ''}
                   />
+                  {validationErrors.price && <span className="error-message">{validationErrors.price}</span>}
                 </div>
               </div>
 
