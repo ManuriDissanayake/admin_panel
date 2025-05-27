@@ -32,22 +32,24 @@ const Header = () => {
   }).format(currentTime)
 
   const handleLogout = async () => {
-    try {
-      // Optional: Call backend logout endpoint if you have one
-      // await fetch("http://localhost:8080/api/admins/logout", { method: "POST" });
-      
-      // Clear authentication data
-      localStorage.removeItem("isAuthenticated");
-      localStorage.removeItem("user");
-      
-      // Force full page reload to reset all state
-      window.location.href = "/login";
-    } catch (error) {
-      console.error("Logout failed:", error);
-      // Still proceed with local cleanup
-      localStorage.removeItem("isAuthenticated");
-      localStorage.removeItem("user");
-      window.location.href = "/login";
+    if (window.confirm("Are you sure you want to log out?")) {
+      try {
+        // Optional: Call backend logout endpoint if you have one
+        // await fetch("http://localhost:8080/api/admins/logout", { method: "POST" });
+        
+        // Clear authentication data
+        localStorage.removeItem("isAuthenticated");
+        localStorage.removeItem("user");
+        
+        // Force full page reload to reset all state
+        window.location.href = "/login";
+      } catch (error) {
+        console.error("Logout failed:", error);
+        // Still proceed with local cleanup
+        localStorage.removeItem("isAuthenticated");
+        localStorage.removeItem("user");
+        window.location.href = "/login";
+      }
     }
   };
 
