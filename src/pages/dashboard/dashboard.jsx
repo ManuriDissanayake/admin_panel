@@ -78,7 +78,7 @@ const Dashboard = () => {
         setStats([
           {
             title: "Total Revenue",
-            value: `$${statsData.totalRevenue.toFixed(2)}`,
+            value: `LKR ${statsData.totalRevenue.toFixed(2)}`,
             change: `${statsData.revenueChange >= 0 ? '+' : ''}${statsData.revenueChange.toFixed(1)}%`,
             isIncrease: statsData.revenueChange >= 0,
             icon: <DollarSign size={24} />,
@@ -94,7 +94,7 @@ const Dashboard = () => {
           },
           {
             title: "Avg. Order Value",
-            value: `⁠ $${statsData.avgOrderValue.toFixed(2)}`,
+            value: `⁠ LKR ${statsData.avgOrderValue.toFixed(2)}`,
             change: `⁠ ${statsData.avgOrderValueChange >= 0 ? '+' : ''}${statsData.avgOrderValueChange.toFixed(1)}% `,
             isIncrease: statsData.avgOrderValueChange >= 0,
             icon: <DollarSign size={24} />,
@@ -202,7 +202,7 @@ const Dashboard = () => {
   const formatCurrency = (value) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'LKR',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     }).format(value)
